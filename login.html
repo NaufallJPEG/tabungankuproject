@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TabunganKu – Login</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="login-body">
+
+    <!-- Animated background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="login-wrapper">
+        <!-- Left Panel -->
+        <div class="login-left">
+            <div class="brand-logo">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <rect width="44" height="44" rx="12" fill="#1941BA" />
+                    <path d="M10 28C10 22 16 14 22 14C28 14 34 22 34 28" stroke="#92BDF9" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <path d="M14 28C14 24 17.5 18 22 18C26.5 18 30 24 30 28" stroke="#FFFFFF" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <circle cx="22" cy="28" r="4" fill="#316FF6" />
+                    <circle cx="22" cy="28" r="2" fill="white" />
+                    <line x1="22" y1="8" x2="22" y2="12" stroke="#92BDF9" stroke-width="2.5" stroke-linecap="round" />
+                    <line x1="12" y1="11" x2="15" y2="14" stroke="#92BDF9" stroke-width="2" stroke-linecap="round" />
+                    <line x1="32" y1="11" x2="29" y2="14" stroke="#92BDF9" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span class="brand-name">TabunganKu</span>
+            </div>
+
+            <div class="login-hero">
+                <h1 class="login-hero-title">Kelola Keuangan<br /><span>Lebih Cerdas</span></h1>
+                <p class="login-hero-sub">Catat pemasukan, pengeluaran, dan capai tujuan tabungan Anda dengan mudah dan
+                    terorganisir.</p>
+                <div class="login-features">
+                    <div class="lf-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 11l3 3L22 4" stroke="#92BDF9" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#92BDF9"
+                                stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Pantau anggaran bulanan</span>
+                    </div>
+                    <div class="lf-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                stroke="#92BDF9" stroke-width="2" stroke-linejoin="round" />
+                        </svg>
+                        <span>Target tabungan tercapai</span>
+                    </div>
+                    <div class="lf-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="3" width="18" height="18" rx="4" stroke="#92BDF9" stroke-width="2" />
+                            <path d="M8 12h8M12 8v8" stroke="#92BDF9" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Laporan & analisis lengkap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Form -->
+        <div class="login-right">
+            <div class="login-card">
+                <div class="login-card-header">
+                    <h2>Masuk ke Akun</h2>
+                    <p>Selamat datang kembali! Silakan login.</p>
+                </div>
+
+                <div id="login-alert" class="alert hidden"></div>
+
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email / Username</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                            <input type="text" id="email" placeholder="contoh@email.com" autocomplete="username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor"
+                                    stroke-width="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <input type="password" id="password" placeholder="Masukkan password"
+                                autocomplete="current-password" />
+                            <button class="toggle-pw" type="button" onclick="togglePassword()"
+                                aria-label="Tampilkan password">
+                                <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember" /> <span>Ingat saya</span>
+                        </label>
+                        <a href="#" class="forgot-link">Lupa password?</a>
+                    </div>
+
+                    <button class="btn-login" onclick="doLogin()">
+                        <span>Masuk</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <div class="divider"><span>atau</span></div>
+
+                    <button class="btn-demo" onclick="demoLogin()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        Masuk sebagai Demo
+                    </button>
+                </div>
+
+                <p class="register-link">Belum punya akun? <a href="#">Daftar Sekarang</a></p>
+            </div>
+
+            <p class="login-footer">Prototype By Muhammad Naufal</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

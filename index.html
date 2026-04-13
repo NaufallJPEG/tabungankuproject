@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TabunganKu – Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="app-body">
+
+    <!-- ========== SIDEBAR OVERLAY (mobile) ========== -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-logo">
+                <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+                    <rect width="44" height="44" rx="12" fill="#1941BA" />
+                    <path d="M10 28C10 22 16 14 22 14C28 14 34 22 34 28" stroke="#92BDF9" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <path d="M14 28C14 24 17.5 18 22 18C26.5 18 30 24 30 28" stroke="#FFFFFF" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <circle cx="22" cy="28" r="4" fill="#316FF6" />
+                    <circle cx="22" cy="28" r="2" fill="white" />
+                </svg>
+                <span class="brand-name">TabunganKu</span>
+            </div>
+            <button class="sidebar-close" onclick="closeSidebar()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- User Info -->
+        <div class="sidebar-user">
+            <div class="user-avatar" id="sidebarAvatar">US</div>
+            <div class="user-info">
+                <div class="user-name" id="sidebarName">user</div>
+                <div class="user-role">Pengguna Aktif</div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">MENU UTAMA</div>
+            <a class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-item" data-page="transaksi" onclick="navigateTo('transaksi')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M17 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M3 11V9a4 4 0 014-4h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M7 23l-4-4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M21 13v2a4 4 0 01-4 4H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span>Transaksi</span>
+            </a>
+            <a class="nav-item" data-page="tabungan" onclick="navigateTo('tabungan')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7 7-7z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Target Tabungan</span>
+                <span class="nav-badge" id="navBadgeTabungan">0</span>
+            </a>
+            <a class="nav-item" data-page="anggaran" onclick="navigateTo('anggaran')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+                <span>Anggaran</span>
+            </a>
+            <a class="nav-item" data-page="laporan" onclick="navigateTo('laporan')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 21H4.6A1.6 1.6 0 013 19.4V3" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                    <path d="M7 16l4-4 4 4 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Laporan</span>
+            </a>
+
+            <div class="nav-section-label" style="margin-top:12px">PENGATURAN</div>
+            <a class="nav-item" data-page="profil" onclick="navigateTo('profil')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span>Profil</span>
+            </a>
+            <a class="nav-item" onclick="doLogout()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                    <polyline points="16,17 21,12 16,7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <line x1="21" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+                <span>Keluar</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ========== MAIN LAYOUT ========== -->
+    <div class="app-layout">
+
+        <!-- TOP NAVBAR -->
+        <header class="top-navbar">
+            <div class="navbar-left">
+                <button class="hamburger" onclick="openSidebar()" aria-label="Menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="navbar-brand">
+                    <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+                        <rect width="44" height="44" rx="12" fill="#1941BA" />
+                        <path d="M10 28C10 22 16 14 22 14C28 14 34 22 34 28" stroke="#92BDF9" stroke-width="2.5"
+                            stroke-linecap="round" />
+                        <path d="M14 28C14 24 17.5 18 22 18C26.5 18 30 24 30 28" stroke="#FFFFFF" stroke-width="2.5"
+                            stroke-linecap="round" />
+                        <circle cx="22" cy="28" r="4" fill="#316FF6" />
+                        <circle cx="22" cy="28" r="2" fill="white" />
+                    </svg>
+                    <span>TabunganKu</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-date" id="navbarDate"></div>
+                <button class="notif-btn" onclick="toggleNotif()" aria-label="Notifikasi">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" />
+                        <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span class="notif-dot" id="notifDot"></span>
+                </button>
+                <div class="notif-dropdown hidden" id="notifDropdown">
+                    <div class="notif-header">Notifikasi</div>
+                    <div class="notif-list" id="notifList"></div>
+                </div>
+                <div class="user-avatar-sm" id="navAvatar" onclick="navigateTo('profil')">AD</div>
+            </div>
+        </header>
+
+        <!-- ========== PAGE CONTENT ========== -->
+        <main class="main-content">
+
+            <!-- ===== DASHBOARD PAGE ===== -->
+            <div class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title" id="greetingTitle">Selamat Pagi!</h1>
+                        <p class="page-subtitle" id="greetingName">Semoga hari Anda menyenangkan </p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('modal-transaksi')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                        Tambah Transaksi
+                    </button>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-grid">
+                    <div class="summary-card card-saldo">
+                        <div class="sc-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="5" width="20" height="14" rx="2" stroke="white" stroke-width="2" />
+                                <line x1="2" y1="10" x2="22" y2="10" stroke="white" stroke-width="2" />
+                                <rect x="6" y="14" width="4" height="2" rx="1" fill="white" />
+                            </svg>
+                        </div>
+                        <div class="sc-content">
+                            <p class="sc-label">Saldo Saat Ini</p>
+                            <h2 class="sc-value" id="totalSaldo">Rp 0</h2>
+                            <p class="sc-change" id="saldoChange">+0% bulan ini</p>
+                        </div>
+                    </div>
+                    <div class="summary-card card-masuk">
+                        <div class="sc-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 19V5M5 12l7-7 7 7" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="sc-content">
+                            <p class="sc-label">Total Pemasukan</p>
+                            <h2 class="sc-value" id="totalMasuk">Rp 0</h2>
+                            <p class="sc-change" id="masukChange">Bulan ini</p>
+                        </div>
+                    </div>
+                    <div class="summary-card card-keluar">
+                        <div class="sc-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12l7 7 7-7" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="sc-content">
+                            <p class="sc-label">Total Pengeluaran</p>
+                            <h2 class="sc-value" id="totalKeluar">Rp 0</h2>
+                            <p class="sc-change" id="keluarChange">Bulan ini</p>
+                        </div>
+                    </div>
+                    <div class="summary-card card-tabungan">
+                        <div class="sc-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"
+                                    stroke="white" stroke-width="2" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="sc-content">
+                            <p class="sc-label">Total Tabungan</p>
+                            <h2 class="sc-value" id="totalTabungan">Rp 0</h2>
+                            <p class="sc-change" id="tabunganChange">Target aktif</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart + Quick Stats -->
+                <div class="dashboard-mid">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h3>Arus Keuangan Bulanan</h3>
+                            <select class="chart-select" id="chartYear" onchange="renderChart()">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="financeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="quick-stats">
+                        <div class="qs-card">
+                            <h4>Pengeluaran Terbesar</h4>
+                            <div class="qs-list" id="topSpendingList">
+                                <div class="qs-empty">Belum ada data</div>
+                            </div>
+                        </div>
+                        <div class="qs-card">
+                            <h4>Target Tabungan</h4>
+                            <div id="quickTargetList">
+                                <div class="qs-empty">Belum ada target</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-card">
+                    <div class="recent-header">
+                        <h3>Transaksi Terbaru</h3>
+                        <button class="btn-link" onclick="navigateTo('transaksi')">Lihat Semua →</button>
+                    </div>
+                    <div id="recentTransList">
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"
+                                    stroke="#92BDF9" stroke-width="1.5" />
+                                <rect x="9" y="3" width="6" height="4" rx="1" stroke="#92BDF9" stroke-width="1.5" />
+                                <path d="M9 12h6M9 16h4" stroke="#92BDF9" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            <p>Belum ada transaksi. <br />Mulai catat keuangan Anda!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== TRANSAKSI PAGE ===== -->
+            <div class="page" id="page-transaksi">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Transaksi</h1>
+                        <p class="page-subtitle">Kelola semua pemasukan & pengeluaran</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('modal-transaksi')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                        Tambah
+                    </button>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="filter-bar">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" onclick="filterTrans('semua', this)">Semua</button>
+                        <button class="filter-tab" onclick="filterTrans('masuk', this)">Pemasukan</button>
+                        <button class="filter-tab" onclick="filterTrans('keluar', this)">Pengeluaran</button>
+                    </div>
+                    <div class="filter-right">
+                        <input type="month" class="filter-month" id="filterMonth" onchange="renderTransaksi()" />
+                        <div class="search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" />
+                                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <input type="text" placeholder="Cari transaksi..." id="searchTrans"
+                                oninput="renderTransaksi()" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="transaksiList" class="trans-list"></div>
+            </div>
+
+            <!-- ===== TARGET TABUNGAN PAGE ===== -->
+            <div class="page" id="page-tabungan">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Target Tabungan</h1>
+                        <p class="page-subtitle">Tetapkan dan pantau tujuan keuangan Anda</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('modal-tabungan')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                        Buat Target
+                    </button>
+                </div>
+                <div id="tabunganGrid" class="target-grid"></div>
+            </div>
+
+            <!-- ===== ANGGARAN PAGE ===== -->
+            <div class="page" id="page-anggaran">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Anggaran</h1>
+                        <p class="page-subtitle">Atur batas pengeluaran per kategori</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('modal-anggaran')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                        Buat Anggaran
+                    </button>
+                </div>
+                <div id="anggaranList" class="anggaran-list"></div>
+            </div>
+
+            <!-- ===== LAPORAN PAGE ===== -->
+            <div class="page" id="page-laporan">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Laporan</h1>
+                        <p class="page-subtitle">Analisis keuangan lengkap Anda</p>
+                    </div>
+                    <button class="btn-outline" onclick="printReport()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <polyline points="6,9 6,2 18,2 18,9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"
+                                stroke="currentColor" stroke-width="2" />
+                            <rect x="6" y="14" width="12" height="8" rx="1" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                        Cetak
+                    </button>
+                </div>
+                <div class="laporan-filter">
+                    <select id="laporanBulan" onchange="renderLaporan()">
+                        <option value="0">Semua Bulan</option>
+                        <option value="1">Januari</option>
+                        <option value="2">Februari</option>
+                        <option value="3">Maret</option>
+                        <option value="4">April</option>
+                        <option value="5">Mei</option>
+                        <option value="6">Juni</option>
+                        <option value="7">Juli</option>
+                        <option value="8">Agustus</option>
+                        <option value="9">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+                    <select id="laporanTahun" onchange="renderLaporan()">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+
+                <div class="laporan-grid">
+                    <div class="laporan-summary" id="laporanSummary"></div>
+                    <div class="laporan-chart-wrap">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Distribusi Pengeluaran</h3>
+                            </div>
+                            <div class="chart-container" style="height:260px">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="laporan-tabel-wrap">
+                    <h3 style="margin-bottom:12px;">Rincian Transaksi</h3>
+                    <div class="table-responsive">
+                        <table class="laporan-table" id="laporanTable">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Keterangan</th>
+                                    <th>Kategori</th>
+                                    <th>Tipe</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody id="laporanTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PROFIL PAGE ===== -->
+            <div class="page" id="page-profil">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Profil Saya</h1>
+                        <p class="page-subtitle">Kelola informasi akun Anda</p>
+                    </div>
+                </div>
+                <div class="profil-layout">
+                    <div class="profil-card">
+                        <div class="profil-avatar-wrap">
+                            <div class="profil-avatar" id="profilAvatar">AD</div>
+                            <button class="btn-outline btn-sm"
+                                onclick="document.getElementById('avatarInput').click()">Ganti Foto</button>
+                            <input type="file" id="avatarInput" accept="image/*" style="display:none"
+                                onchange="changeAvatar(this)" />
+                        </div>
+                        <div class="profil-form">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <div class="input-wrapper"><input type="text" id="profilNama" value="Admin Demo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-wrapper"><input type="email" id="profilEmail"
+                                        value="admin@tabunganku.com" /></div>
+                            </div>
+                            <div class="form-group">
+                                <label>No. Telepon</label>
+                                <div class="input-wrapper"><input type="text" id="profilTelp" value="081234567890" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Mata Uang</label>
+                                <div class="input-wrapper">
+                                    <select id="profilMataUang">
+                                        <option value="IDR">IDR – Rupiah</option>
+                                        <option value="USD">USD – Dollar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn-primary" onclick="saveProfile()">Simpan Perubahan</button>
+                        </div>
+                    </div>
+
+                    <div class="profil-stats">
+                        <div class="ps-card">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M17 1l4 4-4 4" stroke="#1941BA" stroke-width="2" stroke-linecap="round" />
+                                <path d="M3 11V9a4 4 0 014-4h14" stroke="#1941BA" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <path d="M7 23l-4-4 4-4" stroke="#1941BA" stroke-width="2" stroke-linecap="round" />
+                                <path d="M21 13v2a4 4 0 01-4 4H3" stroke="#1941BA" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <div>
+                                <p>Total Transaksi</p>
+                                <h3 id="statsTrans">0</h3>
+                            </div>
+                        </div>
+                        <div class="ps-card">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7 7-7z"
+                                    stroke="#1941BA" stroke-width="2" />
+                            </svg>
+                            <div>
+                                <p>Target Aktif</p>
+                                <h3 id="statsTarget">0</h3>
+                            </div>
+                        </div>
+                        <div class="ps-card">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <line x1="12" y1="1" x2="12" y2="23" stroke="#1941BA" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="#1941BA"
+                                    stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <div>
+                                <p>Anggaran Aktif</p>
+                                <h3 id="statsAnggaran">0</h3>
+                            </div>
+                        </div>
+                        <div class="ps-card">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="18" rx="2" stroke="#1941BA" stroke-width="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" stroke="#1941BA" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <line x1="8" y1="2" x2="8" y2="6" stroke="#1941BA" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <line x1="3" y1="10" x2="21" y2="10" stroke="#1941BA" stroke-width="2" />
+                            </svg>
+                            <div>
+                                <p>Member Sejak</p>
+                                <h3 id="statsSince">2025</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- BOTTOM NAV (mobile) -->
+        <nav class="bottom-nav">
+            <a class="bn-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span>Home</span>
+            </a>
+            <a class="bn-item" data-page="transaksi" onclick="navigateTo('transaksi')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M17 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M3 11V9a4 4 0 014-4h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M7 23l-4-4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M21 13v2a4 4 0 01-4 4H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span>Transaksi</span>
+            </a>
+            <a class="bn-item bn-add" onclick="openModal('modal-transaksi')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+            </a>
+            <a class="bn-item" data-page="tabungan" onclick="navigateTo('tabungan')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7 7-7z"
+                        stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span>Tabungan</span>
+            </a>
+            <a class="bn-item" data-page="profil" onclick="navigateTo('profil')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- ========== MODALS ========== -->
+
+    <!-- Modal Transaksi -->
+    <div class="modal-overlay hidden" id="modal-transaksi">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTransTitle">Tambah Transaksi</h3>
+                <button class="modal-close" onclick="closeModal('modal-transaksi')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editTransId" />
+                <div class="type-toggle">
+                    <button class="type-btn active" id="typeMasuk" onclick="setTransType('masuk')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        Pemasukan
+                    </button>
+                    <button class="type-btn" id="typeKeluar" onclick="setTransType('keluar')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        Pengeluaran
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label>Jumlah (Rp)</label>
+                    <div class="input-wrapper"><input type="number" id="transJumlah" placeholder="0" min="0" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <div class="input-wrapper"><input type="text" id="transKet" placeholder="Misal: Gaji bulan ini" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <div class="input-wrapper">
+                        <select id="transKat">
+                            <option value="">-- Pilih Kategori --</option>
+                            <optgroup label="Pemasukan" id="katMasukGroup">
+                                <option value="Gaji">Gaji</option>
+                                <option value="Bisnis">Bisnis</option>
+                                <option value="Investasi">Investasi</option>
+                                <option value="Bonus">Bonus</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </optgroup>
+                            <optgroup label="Pengeluaran" id="katKeluarGroup">
+                                <option value="Makanan">Makanan & Minuman</option>
+                                <option value="Transportasi">Transportasi</option>
+                                <option value="Belanja">Belanja</option>
+                                <option value="Tagihan">Tagihan & Utilitas</option>
+                                <option value="Kesehatan">Kesehatan</option>
+                                <option value="Hiburan">Hiburan</option>
+                                <option value="Pendidikan">Pendidikan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal</label>
+                    <div class="input-wrapper"><input type="date" id="transTgl" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Catatan (opsional)</label>
+                    <div class="input-wrapper"><textarea id="transCatatan" rows="2"
+                            placeholder="Tambahkan catatan..."></textarea></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" onclick="closeModal('modal-transaksi')">Batal</button>
+                <button class="btn-primary" onclick="saveTransaksi()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Target Tabungan -->
+    <div class="modal-overlay hidden" id="modal-tabungan">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTabTitle">Buat Target Tabungan</h3>
+                <button class="modal-close" onclick="closeModal('modal-tabungan')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editTabId" />
+                <div class="form-group">
+                    <label>Nama Target</label>
+                    <div class="input-wrapper"><input type="text" id="tabNama" placeholder="Misal: Beli Laptop" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Target Jumlah (Rp)</label>
+                    <div class="input-wrapper"><input type="number" id="tabTarget" placeholder="0" min="0" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Terkumpul Saat Ini (Rp)</label>
+                    <div class="input-wrapper"><input type="number" id="tabTerkumpul" placeholder="0" min="0" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <div class="input-wrapper"><input type="date" id="tabDeadline" /></div>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <div class="emoji-picker" id="emojiPicker">
+                        <span class="emoji-opt active" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                        <span class="emoji-opt" onclick="selectEmoji(this,'')"></span>
+                    </div>
+                    <input type="hidden" id="tabEmoji" value="🎯" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" onclick="closeModal('modal-tabungan')">Batal</button>
+                <button class="btn-primary" onclick="saveTabungan()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Anggaran -->
+    <div class="modal-overlay hidden" id="modal-anggaran">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Buat Anggaran</h3>
+                <button class="modal-close" onclick="closeModal('modal-anggaran')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editAngId" />
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <div class="input-wrapper">
+                        <select id="angKat">
+                            <option value="Makanan">Makanan & Minuman</option>
+                            <option value="Transportasi">Transportasi</option>
+                            <option value="Belanja">Belanja</option>
+                            <option value="Tagihan">Tagihan & Utilitas</option>
+                            <option value="Kesehatan">Kesehatan</option>
+                            <option value="Hiburan">Hiburan</option>
+                            <option value="Pendidikan">Pendidikan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Batas Anggaran (Rp)</label>
+                    <div class="input-wrapper"><input type="number" id="angBatas" placeholder="0" min="0" /></div>
+                </div>
+                <div class="form-group">
+                    <label>Bulan</label>
+                    <div class="input-wrapper"><input type="month" id="angBulan" /></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" onclick="closeModal('modal-anggaran')">Batal</button>
+                <button class="btn-primary" onclick="saveAnggaran()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Setor Tabungan -->
+    <div class="modal-overlay hidden" id="modal-setor">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3>Setor Tabungan</h3>
+                <button class="modal-close" onclick="closeModal('modal-setor')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="setorTabId" />
+                <p id="setorTabNama" style="font-weight:600;margin-bottom:12px;color:var(--primary)"></p>
+                <div class="form-group">
+                    <label>Jumlah Setor (Rp)</label>
+                    <div class="input-wrapper"><input type="number" id="setorJumlah" placeholder="0" min="0" /></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" onclick="closeModal('modal-setor')">Batal</button>
+                <button class="btn-primary" onclick="doSetor()">Setor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+        <span id="toastMsg">Berhasil!</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
